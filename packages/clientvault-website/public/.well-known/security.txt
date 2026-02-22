@@ -1,0 +1,5 @@
+Contact: https://github.com/clientvaulthq/clientvault/issues/new
+Contact: security@clientvault.com
+Preferred-Languages: en
+Canonical: https://clientvault.com/.well-known/security.txt
+Policy: https://github.com/clientvaulthq/clientvault/security/policy

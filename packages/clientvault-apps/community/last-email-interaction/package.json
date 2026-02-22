@@ -1,0 +1,27 @@
+{
+  "name": "last-email-interaction",
+  "version": "0.0.1",
+  "license": "MIT",
+  "engines": {
+    "node": "^24.5.0",
+    "npm": "please-use-yarn",
+    "yarn": ">=4.0.2"
+  },
+  "packageManager": "yarn@4.9.2",
+  "dependencies": {
+    "axios": "^1.12.2",
+    "clientvault-sdk": "0.2.4"
+  },
+  "devDependencies": {
+    "@types/node": "^24.7.2"
+  },
+  "scripts": {
+    "auth": "clientvault auth login",
+    "dev": "clientvault app dev",
+    "sync": "clientvault app sync",
+    "uninstall": "clientvault app uninstall",
+    "logs": "clientvault app logs",
+    "create-entity": "clientvault app add",
+    "help": "clientvault --help"
+  }
+}

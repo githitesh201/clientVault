@@ -1,0 +1,110 @@
+{
+  "folders": [
+    {
+      "name": "ROOT",
+      "path": "../"
+    },
+    {
+      "name": "packages/clientvault-docker",
+      "path": "../packages/clientvault-docker"
+    },
+    {
+      "name": "packages/clientvault-front",
+      "path": "../packages/clientvault-front"
+    },
+    {
+      "name": "packages/clientvault-ui",
+      "path": "../packages/clientvault-ui"
+    },
+    {
+      "name": "packages/clientvault-emails",
+      "path": "../packages/clientvault-emails"
+    },
+    {
+      "name": "packages/clientvault-shared",
+      "path": "../packages/clientvault-shared"
+    },
+    {
+      "name": "packages/clientvault-server",
+      "path": "../packages/clientvault-server"
+    },
+    {
+      "name": "packages/clientvault-utils",
+      "path": "../packages/clientvault-utils"
+    },
+    {
+      "name": "packages/clientvault-zapier",
+      "path": "../packages/clientvault-zapier"
+    },
+    {
+      "name": "tools/eslint-rules",
+      "path": "../tools/eslint-rules"
+    },
+    {
+      "name": "packages/clientvault-e2e-testing",
+      "path": "../packages/clientvault-e2e-testing"
+    }
+  ],
+  "settings": {
+    "editor.formatOnSave": false,
+    "files.eol": "auto",
+    "[typescript]": {
+      "editor.formatOnSave": false,
+      "editor.codeActionsOnSave": {
+        "source.fixAll.eslint": "explicit",
+        "source.addMissingImports": "always"
+      }
+    },
+    "[javascript]": {
+      "editor.formatOnSave": false,
+      "editor.codeActionsOnSave": {
+        "source.fixAll.eslint": "explicit",
+        "source.addMissingImports": "always"
+      }
+    },
+    "[typescriptreact]": {
+      "editor.formatOnSave": false,
+      "editor.codeActionsOnSave": {
+        "source.fixAll.eslint": "explicit",
+        "source.addMissingImports": "always"
+      }
+    },
+    "[json]": {
+      "editor.formatOnSave": true
+    },
+    "javascript.format.enable": false,
+    "typescript.format.enable": false,
+    "cSpell.enableFiletypes": [
+      "!javascript",
+      "!json",
+      "!typescript",
+      "!typescriptreact",
+      "md",
+      "mdx"
+    ],
+    "cSpell.words": [
+      "clientvaulthq"
+    ],
+    "typescript.preferences.importModuleSpecifier": "non-relative",
+    "[javascript][typescript][typescriptreact]": {
+      "editor.codeActionsOnSave": {
+        "source.fixAll.eslint": "explicit",
+        "source.addMissingImports": "always"
+      }
+    },
+    "search.exclude": {
+      "**/.yarn": true,
+    },
+    "files.exclude": {
+      "packages/": true
+    },
+    "jest.runMode": "on-demand",
+    "jest.disabledWorkspaceFolders": [
+      "ROOT",
+      "packages/clientvault-zapier",
+      "packages/clientvault-docker",
+      "packages/clientvault-utils",
+      "packages/clientvault-postgres"
+    ]
+  }
+}

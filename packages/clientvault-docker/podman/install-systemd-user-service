@@ -1,0 +1,11 @@
+#!/bin/bash
+set -e
+
+mkdir -p ~/.config/systemd/user
+[ -f clientvaultcrm.service ] || { echo "Error: clientvaultcrm.service not found"; exit 1; }
+cp clientvaultcrm.service ~/.config/systemd/user
+
+
+systemctl --user daemon-reload
+systemctl --user enable clientvaultcrm.service
+systemctl --user start clientvaultcrm.service

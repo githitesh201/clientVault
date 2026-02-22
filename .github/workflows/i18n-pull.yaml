@@ -48,22 +48,22 @@ jobs:
       - name: Install dependencies
         uses: ./.github/actions/yarn-install
 
-      - name: Build twenty-shared
-        run: npx nx build twenty-shared
+      - name: Build clientvault-shared
+        run: npx nx build clientvault-shared
 
       # Strict mode fails if there are missing translations.
       - name: Compile translations
         id: compile_translations_strict
         run: |
-          npx nx run twenty-server:lingui:compile --strict
-          npx nx run twenty-emails:lingui:compile --strict
-          npx nx run twenty-front:lingui:compile --strict
+          npx nx run clientvault-server:lingui:compile --strict
+          npx nx run clientvault-emails:lingui:compile --strict
+          npx nx run clientvault-front:lingui:compile --strict
         continue-on-error: true
 
       - name: Stash any changes before pulling translations
         run: |
           git config --global user.name 'github-actions'
-          git config --global user.email 'github-actions@twenty.com'
+          git config --global user.email 'github-actions@clientvault.com'
           git add .
           git stash
 
@@ -78,7 +78,7 @@ jobs:
           translation: '%original_path%/%locale%.po'
           export_only_approved: false
           localization_branch_name: i18n
-          base_url: 'https://twenty.api.crowdin.com'
+          base_url: 'https://clientvault.api.crowdin.com'
           auto_approve_imported: false
           import_eq_suggestions: false
           download_sources: false
@@ -103,7 +103,7 @@ jobs:
 
       # Fix encoding issues (escaped Unicode like \u62db -> 招) and push fixes back to Crowdin
       - name: Fix translation encoding and sync to Crowdin
-        run: npx ts-node packages/twenty-utils/fix-crowdin-translations.ts
+        run: npx ts-node packages/clientvault-utils/fix-crowdin-translations.ts
         env:
           CROWDIN_PERSONAL_TOKEN: ${{ secrets.CROWDIN_PERSONAL_TOKEN }}
 
@@ -112,9 +112,9 @@ jobs:
         # Because we have set English as a fallback locale, this condition does not work anymore
         # if: inputs.force_pull || steps.compile_translations_strict.outcome == 'failure'
         run: |
-          npx nx run twenty-server:lingui:compile
-          npx nx run twenty-emails:lingui:compile
-          npx nx run twenty-front:lingui:compile
+          npx nx run clientvault-server:lingui:compile
+          npx nx run clientvault-emails:lingui:compile
+          npx nx run clientvault-front:lingui:compile
           git status
           git add .
           if ! git diff --staged --quiet --exit-code; then

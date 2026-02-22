@@ -1,0 +1,56 @@
+version: "3.8"
+
+services:
+  db:
+    container_name: clientvault-db
+    image: postgres:16
+    environment:
+      POSTGRES_DB: clientvault
+      POSTGRES_USER: clientvault
+      POSTGRES_PASSWORD: ${PG_DATABASE_PASSWORD}
+    volumes:
+      - clientvault-db-data:/var/lib/postgresql/data:Z
+
+  redis:
+    container_name: clientvault-redis
+    image: redis:latest
+    command: ["--maxmemory-policy", "noeviction"]
+    volumes:
+      - clientvault-redis-data:/data:Z
+
+  server:
+    container_name: clientvault-server
+    image: clientvaultcrm/clientvault:latest
+    environment:
+      NODE_PORT: "3000"
+      SERVER_URL: ${SERVER_URL}
+      PG_DATABASE_URL: "postgresql://clientvault:${PG_DATABASE_PASSWORD}@clientvault-db:5432/clientvault"
+      REDIS_URL: "redis://clientvault-redis:6379"
+      APP_SECRET: ${APP_SECRET}
+      NODE_ENV: production
+      LOG_LEVEL: info
+    volumes:
+      - clientvault-server-data:/app/docker-data:Z
+    ports:
+      - 127.0.0.1:8080:3000
+
+  worker:
+    container_name: clientvault-worker
+    image: clientvaultcrm/clientvault:latest
+    command: yarn worker:prod
+    environment:
+      SERVER_URL: ${SERVER_URL}
+      PG_DATABASE_URL: "postgresql://clientvault:${PG_DATABASE_PASSWORD}@clientvault-db:5432/clientvault"
+      REDIS_URL: "redis://clientvault-redis:6379"
+      APP_SECRET: ${APP_SECRET}
+      DISABLE_DB_MIGRATIONS: "true"
+      NODE_ENV: production
+      LOG_LEVEL: info
+    volumes:
+      - clientvault-server-data:/app/docker-data:Z
+    init: true
+
+volumes:
+  clientvault-db-data:
+  clientvault-server-data:
+  clientvault-redis-data:

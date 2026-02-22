@@ -11,8 +11,8 @@ import unicornPlugin from 'eslint-plugin-unicorn';
 import unusedImportsPlugin from 'eslint-plugin-unused-imports';
 import jsoncParser from 'jsonc-eslint-parser';
 
-const twentyRules = await nxPlugin.loadWorkspaceRules(
-  'packages/twenty-eslint-rules',
+const clientvaultRules = await nxPlugin.loadWorkspaceRules(
+  'packages/clientvault-eslint-rules',
 );
 
 export default [
@@ -203,7 +203,7 @@ export default [
     plugins: {
       ...mdxPlugin.flat.plugins,
       '@nx': nxPlugin,
-      twenty: { rules: twentyRules },
+      clientvault: { rules: clientvaultRules },
     },
   },
   mdxPlugin.flatCodeBlocks,
@@ -214,9 +214,9 @@ export default [
       'unused-imports/no-unused-imports': 'off',
       'unused-imports/no-unused-vars': 'off',
       // Enforce JSX tags on separate lines to prevent Crowdin translation issues
-      'twenty/mdx-component-newlines': 'error',
+      'clientvault/mdx-component-newlines': 'error',
       // Disallow angle bracket placeholders to prevent Crowdin translation errors
-      'twenty/no-angle-bracket-placeholders': 'error',
+      'clientvault/no-angle-bracket-placeholders': 'error',
     },
   },
 ];

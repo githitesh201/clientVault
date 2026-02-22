@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-Twenty is an open-source CRM built with modern technologies in a monorepo structure. The codebase is organized as an Nx workspace with multiple packages.
+ClientVault is an open-source CRM built with modern technologies in a monorepo structure. The codebase is organized as an Nx workspace with multiple packages.
 
 ## Key Commands
 
@@ -14,9 +14,9 @@ Twenty is an open-source CRM built with modern technologies in a monorepo struct
 yarn start
 
 # Individual package development
-npx nx start twenty-front     # Start frontend dev server
-npx nx start twenty-server    # Start backend server
-npx nx run twenty-server:worker  # Start background worker
+npx nx start clientvault-front     # Start frontend dev server
+npx nx start clientvault-server    # Start backend server
+npx nx run clientvault-server:worker  # Start background worker
 ```
 
 ### Testing
@@ -25,15 +25,15 @@ npx nx run twenty-server:worker  # Start background worker
 npx jest path/to/test.test.ts --config=packages/PROJECT/jest.config.mjs
 
 # Run all tests for a package
-npx nx test twenty-front      # Frontend unit tests
-npx nx test twenty-server     # Backend unit tests
-npx nx run twenty-server:test:integration:with-db-reset  # Integration tests with DB reset
+npx nx test clientvault-front      # Frontend unit tests
+npx nx test clientvault-server     # Backend unit tests
+npx nx run clientvault-server:test:integration:with-db-reset  # Integration tests with DB reset
 # To run an indivual test or a pattern of tests, use the following command:
 cd packages/{workspace} && npx jest "pattern or filename"
 
 # Storybook
-npx nx storybook:build twenty-front
-npx nx storybook:test twenty-front
+npx nx storybook:build clientvault-front
+npx nx storybook:test clientvault-front
 
 # When testing the UI end to end, click on "Continue with Email" and use the prefilled credentials.
 ```
@@ -41,50 +41,50 @@ npx nx storybook:test twenty-front
 ### Code Quality
 ```bash
 # Linting (diff with main - fastest, always prefer this)
-npx nx lint:diff-with-main twenty-front
-npx nx lint:diff-with-main twenty-server
-npx nx lint:diff-with-main twenty-front --configuration=fix  # Auto-fix
+npx nx lint:diff-with-main clientvault-front
+npx nx lint:diff-with-main clientvault-server
+npx nx lint:diff-with-main clientvault-front --configuration=fix  # Auto-fix
 
 # Linting (full project - slower, use only when needed)
-npx nx lint twenty-front
-npx nx lint twenty-server
+npx nx lint clientvault-front
+npx nx lint clientvault-server
 
 # Type checking
-npx nx typecheck twenty-front
-npx nx typecheck twenty-server
+npx nx typecheck clientvault-front
+npx nx typecheck clientvault-server
 
 # Format code
-npx nx fmt twenty-front
-npx nx fmt twenty-server
+npx nx fmt clientvault-front
+npx nx fmt clientvault-server
 ```
 
 ### Build
 ```bash
-# Build packages (twenty-shared must be built first)
-npx nx build twenty-shared
-npx nx build twenty-front
-npx nx build twenty-server
+# Build packages (clientvault-shared must be built first)
+npx nx build clientvault-shared
+npx nx build clientvault-front
+npx nx build clientvault-server
 ```
 
 ### Database Operations
 ```bash
 # Database management
-npx nx database:reset twenty-server         # Reset database
-npx nx run twenty-server:database:init:prod # Initialize database
-npx nx run twenty-server:database:migrate:prod # Run migrations
+npx nx database:reset clientvault-server         # Reset database
+npx nx run clientvault-server:database:init:prod # Initialize database
+npx nx run clientvault-server:database:migrate:prod # Run migrations
 
 # Generate migration (replace [name] with kebab-case descriptive name)
-npx nx run twenty-server:typeorm migration:generate src/database/typeorm/core/migrations/common/[name] -d src/database/typeorm/core/core.datasource.ts
+npx nx run clientvault-server:typeorm migration:generate src/database/typeorm/core/migrations/common/[name] -d src/database/typeorm/core/core.datasource.ts
 
 # Sync metadata
-npx nx run twenty-server:command workspace:sync-metadata
+npx nx run clientvault-server:command workspace:sync-metadata
 ```
 
 ### GraphQL
 ```bash
 # Generate GraphQL types (run after schema changes)
-npx nx run twenty-front:graphql:generate
-npx nx run twenty-front:graphql:generate --configuration=metadata
+npx nx run clientvault-front:graphql:generate
+npx nx run clientvault-front:graphql:generate --configuration=metadata
 ```
 
 ## Architecture Overview
@@ -97,14 +97,14 @@ npx nx run twenty-front:graphql:generate --configuration=metadata
 ### Package Structure
 ```
 packages/
-├── twenty-front/          # React frontend application
-├── twenty-server/         # NestJS backend API
-├── twenty-ui/             # Shared UI components library
-├── twenty-shared/         # Common types and utilities
-├── twenty-emails/         # Email templates with React Email
-├── twenty-website/        # Next.js documentation website
-├── twenty-zapier/         # Zapier integration
-└── twenty-e2e-testing/    # Playwright E2E tests
+├── clientvault-front/          # React frontend application
+├── clientvault-server/         # NestJS backend API
+├── clientvault-ui/             # Shared UI components library
+├── clientvault-shared/         # Common types and utilities
+├── clientvault-emails/         # Email templates with React Email
+├── clientvault-website/        # Next.js documentation website
+├── clientvault-zapier/         # Zapier integration
+└── clientvault-e2e-testing/    # Playwright E2E tests
 ```
 
 ### Key Development Principles
@@ -160,7 +160,7 @@ packages/
 - Never delete or rewrite committed migrations
 
 ### Utility Helpers
-Use existing helpers from `twenty-shared` instead of manual type guards:
+Use existing helpers from `clientvault-shared` instead of manual type guards:
 - `isDefined()`, `isNonEmptyString()`, `isNonEmptyArray()`
 
 ## Development Workflow
@@ -192,7 +192,7 @@ IMPORTANT: Use Context7 for code generation, setup or configuration steps, or li
 
 When running in CI, the dev environment is **not** pre-configured. Dependencies are installed but builds, env files, and databases are not set up.
 
-- **Before running tests, builds, lint, type checks, or DB operations**, run: `bash packages/twenty-utils/setup-dev-env.sh`
+- **Before running tests, builds, lint, type checks, or DB operations**, run: `bash packages/clientvault-utils/setup-dev-env.sh`
 - **Skip the setup script** for tasks that only read code — architecture questions, code review, documentation, etc.
 - The script is idempotent and safe to run multiple times.
 

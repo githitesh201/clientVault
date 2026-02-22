@@ -26,13 +26,13 @@ jobs:
       - name: Install dependencies
         uses: ./.github/actions/yarn-install
 
-      - name: Build twenty-shared
-        run: npx nx build twenty-shared
+      - name: Build clientvault-shared
+        run: npx nx build clientvault-shared
 
       - name: Generate QA report from Crowdin
         id: generate_report
         run: |
-          npx ts-node packages/twenty-utils/translation-qa-report.ts || true
+          npx ts-node packages/clientvault-utils/translation-qa-report.ts || true
           if [ -f TRANSLATION_QA_REPORT.md ]; then
             echo "report_generated=true" >> $GITHUB_OUTPUT
             # Count critical issues (exclude spellcheck)
@@ -49,7 +49,7 @@ jobs:
         if: steps.generate_report.outputs.report_generated == 'true'
         run: |
           git config --global user.name 'github-actions'
-          git config --global user.email 'github-actions@twenty.com'
+          git config --global user.email 'github-actions@clientvault.com'
 
           BRANCH_NAME="i18n-qa-report-$(date +%Y-%m-%d)"
           git checkout -B $BRANCH_NAME
@@ -74,7 +74,7 @@ jobs:
 
           **Critical issues (excluding spellcheck): $CRITICAL**
 
-          📊 **View in Crowdin**: https://twenty.crowdin.com/u/projects/1/all?filter=qa-issue
+          📊 **View in Crowdin**: https://clientvault.crowdin.com/u/projects/1/all?filter=qa-issue
 
           ### For AI-Assisted Fixing
 
@@ -92,10 +92,10 @@ jobs:
 
           \`\`\`bash
           # View QA report
-          CROWDIN_PERSONAL_TOKEN=xxx npx ts-node packages/twenty-utils/translation-qa-report.ts
+          CROWDIN_PERSONAL_TOKEN=xxx npx ts-node packages/clientvault-utils/translation-qa-report.ts
 
           # Fix encoding issues automatically
-          CROWDIN_PERSONAL_TOKEN=xxx npx ts-node packages/twenty-utils/fix-crowdin-translations.ts
+          CROWDIN_PERSONAL_TOKEN=xxx npx ts-node packages/clientvault-utils/fix-crowdin-translations.ts
           \`\`\`
 
           ---

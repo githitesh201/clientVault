@@ -1,6 +1,6 @@
 {
   "install": "yarn install",
-  "start": "sudo service docker start && sleep 2 && (docker start twenty_pg 2>/dev/null || make -C packages/twenty-docker postgres-on-docker) && (docker start twenty_redis 2>/dev/null || make -C packages/twenty-docker redis-on-docker) && until docker exec twenty_pg pg_isready -U postgres -h localhost 2>/dev/null; do sleep 1; done && echo 'PostgreSQL ready' && until docker exec twenty_redis redis-cli ping 2>/dev/null | grep -q PONG; do sleep 1; done && echo 'Redis ready' && bash packages/twenty-utils/setup-dev-env.sh && npx nx database:reset twenty-server",
+  "start": "sudo service docker start && sleep 2 && (docker start clientvault_pg 2>/dev/null || make -C packages/clientvault-docker postgres-on-docker) && (docker start clientvault_redis 2>/dev/null || make -C packages/clientvault-docker redis-on-docker) && until docker exec clientvault_pg pg_isready -U postgres -h localhost 2>/dev/null; do sleep 1; done && echo 'PostgreSQL ready' && until docker exec clientvault_redis redis-cli ping 2>/dev/null | grep -q PONG; do sleep 1; done && echo 'Redis ready' && bash packages/clientvault-utils/setup-dev-env.sh && npx nx database:reset clientvault-server",
   "terminals": [
     {
       "name": "Development Server",

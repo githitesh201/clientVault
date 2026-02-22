@@ -18,7 +18,7 @@ jobs:
     with:
       files: |
         package.json
-        packages/twenty-website/**
+        packages/clientvault-website/**
   website-build:
     needs: changed-files-check
     if: needs.changed-files-check.outputs.any_changed == 'true'
@@ -26,7 +26,7 @@ jobs:
     runs-on: ubuntu-latest
     services:
       postgres:
-        image: twentycrm/twenty-postgres-spilo
+        image: clientvaultcrm/clientvault-postgres-spilo
         env:
           PGUSER_SUPERUSER: postgres
           PGPASSWORD_SUPERUSER: postgres
@@ -51,11 +51,11 @@ jobs:
         run: PGPASSWORD=postgres psql -h localhost -p 5432 -U postgres -d postgres -c 'CREATE DATABASE "default";'
 
       - name: Website / Run migrations
-        run: npx nx database:migrate twenty-website
+        run: npx nx database:migrate clientvault-website
         env:
           DATABASE_PG_URL: postgres://postgres:postgres@localhost:5432/default
       - name: Website / Build Website
-        run: npx nx build twenty-website
+        run: npx nx build clientvault-website
         env:
           DATABASE_PG_URL: postgres://postgres:postgres@localhost:5432/default
           KEYSTATIC_GITHUB_CLIENT_ID: xxx

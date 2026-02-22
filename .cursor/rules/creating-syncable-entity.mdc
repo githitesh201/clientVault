@@ -1,12 +1,12 @@
 ---
-description: Main guide for creating syncable entities in Twenty's workspace migration system
+description: Main guide for creating syncable entities in ClientVault's workspace migration system
 globs: ["**/metadata-modules/**", "**/workspace-migration/**"]
 alwaysApply: false
 ---
 
 # Creating a New Syncable Entity - Main Guide
 
-This is the main guide for creating **syncable entities** in Twenty's workspace migration architecture.
+This is the main guide for creating **syncable entities** in ClientVault's workspace migration architecture.
 
 ## Documentation Structure
 
@@ -22,7 +22,7 @@ This main guide provides a high-level overview and navigation hub.
 
 A syncable entity is a metadata entity that:
 - Has a **`universalIdentifier`**: A unique identifier used for syncing entities across workspaces/applications
-- Has an **`applicationId`**: Links the entity to an application (Twenty Standard or Custom applications)
+- Has an **`applicationId`**: Links the entity to an application (ClientVault Standard or Custom applications)
 - Participates in the **workspace migration system**: Can be created, updated, and deleted through the migration pipeline
 - Is **cached as a flat entity**: Denormalized representation for efficient validation and change detection
 
@@ -165,10 +165,10 @@ For parallel development:
 ### File Locations
 
 ```
-packages/twenty-shared/src/metadata/
+packages/clientvault-shared/src/metadata/
 └── all-metadata-name.constant.ts
 
-packages/twenty-server/src/engine/metadata-modules/
+packages/clientvault-server/src/engine/metadata-modules/
 ├── my-entity/                           # Step 1
 │   └── entities/
 ├── flat-my-entity/                      # Steps 1-2
@@ -182,7 +182,7 @@ packages/twenty-server/src/engine/metadata-modules/
     ├── all-many-to-one-metadata-foreign-key.constant.ts
     └── all-many-to-one-metadata-relations.constant.ts
 
-packages/twenty-server/src/engine/workspace-manager/workspace-migration/
+packages/clientvault-server/src/engine/workspace-manager/workspace-migration/
 ├── workspace-migration-builder/         # Step 3
 │   ├── builders/my-entity/
 │   └── validators/services/

@@ -22,11 +22,11 @@ jobs:
       files: |
         package.json
         yarn.lock
-        packages/twenty-server/**
-        packages/twenty-front/src/generated/**
-        packages/twenty-front/src/generated-metadata/**
-        packages/twenty-emails/**
-        packages/twenty-shared/**
+        packages/clientvault-server/**
+        packages/clientvault-front/src/generated/**
+        packages/clientvault-front/src/generated-metadata/**
+        packages/clientvault-emails/**
+        packages/clientvault-shared/**
   server-setup:
     needs: changed-files-check
     if: needs.changed-files-check.outputs.any_changed == 'true'
@@ -34,7 +34,7 @@ jobs:
     runs-on: ubuntu-latest-8-cores
     services:
       postgres:
-        image: twentycrm/twenty-postgres-spilo
+        image: clientvaultcrm/clientvault-postgres-spilo
         env:
           PGUSER_SUPERUSER: postgres
           PGPASSWORD_SUPERUSER: postgres
@@ -63,26 +63,26 @@ jobs:
         uses: ./.github/actions/restore-cache
         with:
           key: ${{ env.SERVER_SETUP_CACHE_KEY }}
-      - name: Build twenty-shared
-        run: npx nx build twenty-shared
+      - name: Build clientvault-shared
+        run: npx nx build clientvault-shared
       - name: Server / Run lint & typecheck
         uses: ./.github/actions/nx-affected
         with:
           tag: scope:backend
           tasks: lint,typecheck
       - name: Server / Write .env
-        run: npx nx reset:env twenty-server
+        run: npx nx reset:env clientvault-server
       - name: Server / Build
-        run: npx nx build twenty-server
+        run: npx nx build clientvault-server
       - name: Server / Create DB
         run: |
           PGPASSWORD=postgres psql -h localhost -p 5432 -U postgres -d postgres -c 'CREATE DATABASE "default";'
           PGPASSWORD=postgres psql -h localhost -p 5432 -U postgres -d postgres -c 'CREATE DATABASE "test";'
-          npx nx run twenty-server:database:init:prod
-          npx nx run twenty-server:database:migrate:prod
+          npx nx run clientvault-server:database:init:prod
+          npx nx run clientvault-server:database:migrate:prod
       - name: Worker / Run
         run: |
-          timeout 30s npx nx run twenty-server:worker || exit_code=$?
+          timeout 30s npx nx run clientvault-server:worker || exit_code=$?
           if [ $exit_code -eq 124 ]; then
             # If timeout was reached (exit code 124), consider it a success
             exit 0
@@ -91,7 +91,7 @@ jobs:
             exit $exit_code
           fi
       - name: Server / Start
-        run: npx nx start:ci twenty-server &
+        run: npx nx start:ci clientvault-server &
       - name: Waiting for server starting...
         run: |
           for i in {1..10}; do
@@ -106,34 +106,34 @@ jobs:
           exit 1
       - name: Server / Check for Pending Migrations
         run: |
-          CORE_MIGRATION_OUTPUT=$(npx nx run twenty-server:typeorm migration:generate core-migration-check -d src/database/typeorm/core/core.datasource.ts || true)
+          CORE_MIGRATION_OUTPUT=$(npx nx run clientvault-server:typeorm migration:generate core-migration-check -d src/database/typeorm/core/core.datasource.ts || true)
 
-          CORE_MIGRATION_FILE=$(ls packages/twenty-server/*core-migration-check.ts 2>/dev/null || echo "")
+          CORE_MIGRATION_FILE=$(ls packages/clientvault-server/*core-migration-check.ts 2>/dev/null || echo "")
 
           if [ -n "$CORE_MIGRATION_FILE" ]; then
             echo "::error::Unexpected migration files were generated. Please create a proper migration manually."
             echo "$CORE_MIGRATION_OUTPUT"
 
-            rm -f packages/twenty-server/*core-migration-check.ts
+            rm -f packages/clientvault-server/*core-migration-check.ts
 
             exit 1
           fi
       - name: GraphQL / Check for Pending Generation
         run: |
           # Run GraphQL generation commands
-          npx nx run twenty-front:graphql:generate
-          npx nx run twenty-front:graphql:generate --configuration=metadata
+          npx nx run clientvault-front:graphql:generate
+          npx nx run clientvault-front:graphql:generate --configuration=metadata
 
           # Check if GraphQL generated files were modified
-          if ! git diff --quiet -- packages/twenty-front/src/generated packages/twenty-front/src/generated-metadata; then
-            echo "::error::GraphQL schema changes detected. Please run 'npx nx run twenty-front:graphql:generate' and 'npx nx run twenty-front:graphql:generate --configuration=metadata' and commit the changes."
+          if ! git diff --quiet -- packages/clientvault-front/src/generated packages/clientvault-front/src/generated-metadata; then
+            echo "::error::GraphQL schema changes detected. Please run 'npx nx run clientvault-front:graphql:generate' and 'npx nx run clientvault-front:graphql:generate --configuration=metadata' and commit the changes."
             echo ""
             echo "The following GraphQL schema changes were detected:"
             echo "==================================================="
-            git diff -- packages/twenty-front/src/generated packages/twenty-front/src/generated-metadata
+            git diff -- packages/clientvault-front/src/generated packages/clientvault-front/src/generated-metadata
             echo "==================================================="
             echo ""
-            echo "Please run 'npx nx run twenty-front:graphql:generate' and 'npx nx run twenty-front:graphql:generate --configuration=metadata' and commit the changes."
+            echo "Please run 'npx nx run clientvault-front:graphql:generate' and 'npx nx run clientvault-front:graphql:generate --configuration=metadata' and commit the changes."
             echo ""
             exit 1
           fi
@@ -172,7 +172,7 @@ jobs:
         shard: [1, 2, 3, 4, 5, 6, 7, 8]
     services:
       postgres:
-        image: twentycrm/twenty-postgres-spilo
+        image: clientvaultcrm/clientvault-postgres-spilo
         env:
           PGUSER_SUPERUSER: postgres
           PGPASSWORD_SUPERUSER: postgres
@@ -193,7 +193,7 @@ jobs:
         image: clickhouse/clickhouse-server:25.8.8
         env:
           CLICKHOUSE_PASSWORD: clickhousePassword
-          CLICKHOUSE_URL: "http://default:clickhousePassword@localhost:8123/twenty"
+          CLICKHOUSE_URL: "http://default:clickhousePassword@localhost:8123/clientvault"
         ports:
           - 8123:8123
           - 9000:9000
@@ -205,7 +205,7 @@ jobs:
     env:
       NODE_ENV: test
       ANALYTICS_ENABLED: true
-      CLICKHOUSE_URL: "http://default:clickhousePassword@localhost:8123/twenty"
+      CLICKHOUSE_URL: "http://default:clickhousePassword@localhost:8123/clientvault"
       CLICKHOUSE_PASSWORD: clickhousePassword
       SHARD_COUNTER: 8
     steps:
@@ -228,18 +228,18 @@ jobs:
         with:
           key: ${{ env.SERVER_SETUP_CACHE_KEY }}
       - name: Server / Build
-        run: npx nx build twenty-server
+        run: npx nx build clientvault-server
       - name: Build dependencies
         run: |
-          npx nx build twenty-shared
-          npx nx build twenty-emails
+          npx nx build clientvault-shared
+          npx nx build clientvault-emails
       - name: Server / Create Test DB
         run: |
           PGPASSWORD=postgres psql -h localhost -p 5432 -U postgres -d postgres -c 'CREATE DATABASE "test";'
       - name: Run ClickHouse migrations
-        run: npx nx clickhouse:migrate twenty-server
+        run: npx nx clickhouse:migrate clientvault-server
       - name: Run ClickHouse seeds
-        run: npx nx clickhouse:seed twenty-server
+        run: npx nx clickhouse:seed clientvault-server
       - name: Server / Run Integration Tests
         uses: ./.github/actions/nx-affected
         with:

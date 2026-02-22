@@ -9,9 +9,9 @@ on:
   push:
     branches: ['main']
     paths:
-      - 'packages/twenty-docs/**/*.mdx'
-      - '!packages/twenty-docs/l/**'
-      - 'packages/twenty-docs/navigation/navigation.template.json'
+      - 'packages/clientvault-docs/**/*.mdx'
+      - '!packages/clientvault-docs/l/**'
+      - 'packages/clientvault-docs/navigation/navigation.template.json'
       - '.github/crowdin-docs.yml'
 
 concurrency:
@@ -42,7 +42,7 @@ jobs:
           upload_translations: false
           download_translations: false
           localization_branch_name: i18n-docs
-          base_url: 'https://twenty.api.crowdin.com'
+          base_url: 'https://clientvault.api.crowdin.com'
           config: '.github/crowdin-docs.yml'
         env:
           # Docs translations project

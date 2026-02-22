@@ -24,18 +24,18 @@ jobs:
       files: |
         package.json
         yarn.lock
-        packages/twenty-front/**
-        packages/twenty-ui/**
-        packages/twenty-shared/**
-        packages/twenty-sdk/**
-        !packages/twenty-sdk/package.json
+        packages/clientvault-front/**
+        packages/clientvault-ui/**
+        packages/clientvault-shared/**
+        packages/clientvault-sdk/**
+        !packages/clientvault-sdk/package.json
   changed-files-check-e2e:
     uses: ./.github/workflows/changed-files.yaml
     with:
       files: |
         packages/**
-        !packages/create-twenty-app/package.json
-        !packages/twenty-sdk/package.json
+        !packages/create-clientvault-app/package.json
+        !packages/clientvault-sdk/package.json
         playwright.config.ts
         .github/workflows/ci-front.yaml
   front-sb-build:
@@ -59,9 +59,9 @@ jobs:
       - name: Diagnostic disk space issue
         run: df -h
       - name: Front / Write .env
-        run: npx nx reset:env twenty-front
+        run: npx nx reset:env clientvault-front
       - name: Front / Build storybook
-        run: npx nx storybook:build twenty-front
+        run: npx nx storybook:build clientvault-front
       - name: Save storybook build cache
         uses: ./.github/actions/save-cache
         with:
@@ -87,24 +87,24 @@ jobs:
         uses: ./.github/actions/yarn-install
       - name: Build dependencies
         run: |
-          npx nx build twenty-shared
-          npx nx build twenty-ui
-          npx nx build twenty-sdk
+          npx nx build clientvault-shared
+          npx nx build clientvault-ui
+          npx nx build clientvault-sdk
       - name: Install Playwright
         run: |
-          cd packages/twenty-front
+          cd packages/clientvault-front
           npx playwright install
       - name: Front / Write .env
-        run: npx nx reset:env twenty-front
+        run: npx nx reset:env clientvault-front
       - name: Run storybook tests
-        run: npx nx storybook:test twenty-front --configuration=${{ matrix.storybook_scope }} --shard=${{ matrix.shard }}/${{ env.SHARD_COUNTER }}
+        run: npx nx storybook:test clientvault-front --configuration=${{ matrix.storybook_scope }} --shard=${{ matrix.shard }}/${{ env.SHARD_COUNTER }}
       - name: Rename coverage file
         run: |
-          if [ -f "packages/twenty-front/coverage/storybook/coverage-final.json" ]; then
-            mv packages/twenty-front/coverage/storybook/coverage-final.json packages/twenty-front/coverage/storybook/coverage-shard-${{matrix.shard}}.json
+          if [ -f "packages/clientvault-front/coverage/storybook/coverage-final.json" ]; then
+            mv packages/clientvault-front/coverage/storybook/coverage-final.json packages/clientvault-front/coverage/storybook/coverage-shard-${{matrix.shard}}.json
           else
             echo "Error: coverage-final.json not found"
-            ls -la packages/twenty-front/coverage/storybook/ || echo "Coverage directory does not exist"
+            ls -la packages/clientvault-front/coverage/storybook/ || echo "Coverage directory does not exist"
             exit 1
           fi
       - name: Upload coverage artifact
@@ -112,13 +112,13 @@ jobs:
         with:
           retention-days: 1
           name: coverage-artifacts-${{ matrix.storybook_scope }}-${{ github.run_id }}-${{ matrix.shard }}
-          path: packages/twenty-front/coverage/storybook/coverage-shard-${{matrix.shard}}.json
+          path: packages/clientvault-front/coverage/storybook/coverage-shard-${{matrix.shard}}.json
   merge-reports-and-check-coverage:
     timeout-minutes: 30
     runs-on: ubuntu-latest
     needs: front-sb-test
     env:
-      PATH_TO_COVERAGE: packages/twenty-front/coverage/storybook
+      PATH_TO_COVERAGE: packages/clientvault-front/coverage/storybook
     strategy:
       matrix:
         storybook_scope: [modules, pages, performance]
@@ -138,7 +138,7 @@ jobs:
           mkdir -p ${{ env.PATH_TO_COVERAGE }}
           npx nyc merge coverage-artifacts ${{ env.PATH_TO_COVERAGE }}/coverage-storybook.json
       - name: Checking coverage
-        run: npx nx storybook:coverage twenty-front --checkCoverage=true --configuration=${{ matrix.storybook_scope }}
+        run: npx nx storybook:coverage clientvault-front --checkCoverage=true --configuration=${{ matrix.storybook_scope }}
   front-chromatic-deployment:
     timeout-minutes: 30
     if: false
@@ -159,12 +159,12 @@ jobs:
           key: ${{ env.STORYBOOK_BUILD_CACHE_KEY_FOR_RESTORE_ACTION }}
       - name: Front / Write .env
         run: |
-          cd packages/twenty-front
+          cd packages/clientvault-front
           touch .env
           echo "" >> .env
           echo "REACT_APP_SERVER_BASE_URL=$REACT_APP_SERVER_BASE_URL" >> .env
       - name: Publish to Chromatic
-        run: npx nx run twenty-front:chromatic:ci
+        run: npx nx run clientvault-front:chromatic:ci
   front-task:
     needs: changed-files-check
     if: needs.changed-files-check.outputs.any_changed == 'true'
@@ -225,14 +225,14 @@ jobs:
       - name: Install dependencies
         uses: ./.github/actions/yarn-install
       - name: Front / Write .env
-        run: npx nx reset:env twenty-front
+        run: npx nx reset:env clientvault-front
       - name: Build frontend
-        run: npx nx build twenty-front
+        run: npx nx build clientvault-front
       - name: Upload frontend build artifact
         uses: actions/upload-artifact@v4
         with:
           name: frontend-build
-          path: packages/twenty-front/build
+          path: packages/clientvault-front/build
           retention-days: 1
   e2e-test:
     runs-on: ubuntu-latest
@@ -247,7 +247,7 @@ jobs:
       NODE_OPTIONS: "--max-old-space-size=10240"
     services:
       postgres:
-        image: twentycrm/twenty-postgres-spilo
+        image: clientvaultcrm/clientvault-postgres-spilo
         env:
           PGUSER_SUPERUSER: postgres
           PGPASSWORD_SUPERUSER: postgres
@@ -284,62 +284,62 @@ jobs:
       - name: Install dependencies
         uses: ./.github/actions/yarn-install
 
-      - name: Build twenty-shared
-        run: npx nx build twenty-shared
+      - name: Build clientvault-shared
+        run: npx nx build clientvault-shared
 
       - name: Install Playwright Browsers
-        run: npx nx setup twenty-e2e-testing
+        run: npx nx setup clientvault-e2e-testing
 
       - name: Setup environment files
         run: |
-          cp packages/twenty-front/.env.example packages/twenty-front/.env
-          npx nx reset:env:e2e-testing-server twenty-server
+          cp packages/clientvault-front/.env.example packages/clientvault-front/.env
+          npx nx reset:env:e2e-testing-server clientvault-server
 
       - name: Download frontend build artifact
         if: needs.front-build.result == 'success'
         uses: actions/download-artifact@v4
         with:
           name: frontend-build
-          path: packages/twenty-front/build
+          path: packages/clientvault-front/build
 
       - name: Build frontend (if not available from front-build)
         if: needs.front-build.result == 'skipped'
-        run: NODE_ENV=production NODE_OPTIONS="--max-old-space-size=10240" npx nx build twenty-front
+        run: NODE_ENV=production NODE_OPTIONS="--max-old-space-size=10240" npx nx build clientvault-front
 
       - name: Build server
-        run: npx nx build twenty-server
+        run: npx nx build clientvault-server
 
       - name: Create and setup database
         run: |
           PGPASSWORD=postgres psql -h localhost -p 5432 -U postgres -d postgres -c 'CREATE DATABASE "default";'
           PGPASSWORD=postgres psql -h localhost -p 5432 -U postgres -d postgres -c 'CREATE DATABASE "test";'
-          npx nx run twenty-server:database:reset
+          npx nx run clientvault-server:database:reset
 
       - name: Start server
         run: |
-          npx nx start twenty-server &
+          npx nx start clientvault-server &
           echo "Waiting for server to be ready..."
           timeout 60 bash -c 'until curl -s http://localhost:3000/health; do sleep 2; done'
 
       - name: Start frontend
         run: |
-          npm_config_yes=true npx serve -s packages/twenty-front/build -l 3001 &
+          npm_config_yes=true npx serve -s packages/clientvault-front/build -l 3001 &
           echo "Waiting for frontend to be ready..."
           timeout 60 bash -c 'until curl -s http://localhost:3001; do sleep 2; done'
 
       - name: Start worker
         run: |
-          npx nx run twenty-server:worker &
+          npx nx run clientvault-server:worker &
           echo "Worker started"
 
       - name: Run Playwright tests
-        run: npx nx test twenty-e2e-testing
+        run: npx nx test clientvault-e2e-testing
 
       - uses: actions/upload-artifact@v4
         if: always()
         with:
           name: playwright-report
-          path: packages/twenty-e2e-testing/run_results/
+          path: packages/clientvault-e2e-testing/run_results/
           retention-days: 30
 
   ci-front-status-check:

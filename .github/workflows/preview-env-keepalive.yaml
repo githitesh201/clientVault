@@ -22,28 +22,28 @@ jobs:
         run: |
           echo "Patching docker-compose.yml..."
           # change image to localbuild using yq
-          yq eval 'del(.services.server.image)' -i packages/twenty-docker/docker-compose.yml
-          yq eval '.services.server.build.context = "../../"' -i packages/twenty-docker/docker-compose.yml
-          yq eval '.services.server.build.dockerfile = "./packages/twenty-docker/twenty/Dockerfile"' -i packages/twenty-docker/docker-compose.yml
+          yq eval 'del(.services.server.image)' -i packages/clientvault-docker/docker-compose.yml
+          yq eval '.services.server.build.context = "../../"' -i packages/clientvault-docker/docker-compose.yml
+          yq eval '.services.server.build.dockerfile = "./packages/clientvault-docker/clientvault/Dockerfile"' -i packages/clientvault-docker/docker-compose.yml
           
-          yq eval 'del(.services.worker.image)' -i packages/twenty-docker/docker-compose.yml
-          yq eval '.services.worker.build.context = "../../"' -i packages/twenty-docker/docker-compose.yml
-          yq eval '.services.worker.build.dockerfile = "./packages/twenty-docker/twenty/Dockerfile"' -i packages/twenty-docker/docker-compose.yml
+          yq eval 'del(.services.worker.image)' -i packages/clientvault-docker/docker-compose.yml
+          yq eval '.services.worker.build.context = "../../"' -i packages/clientvault-docker/docker-compose.yml
+          yq eval '.services.worker.build.dockerfile = "./packages/clientvault-docker/clientvault/Dockerfile"' -i packages/clientvault-docker/docker-compose.yml
           
           echo "Adding SIGN_IN_PREFILLED environment variable to server service..."
-          yq eval '.services.server.environment.SIGN_IN_PREFILLED = "${SIGN_IN_PREFILLED}"' -i packages/twenty-docker/docker-compose.yml
+          yq eval '.services.server.environment.SIGN_IN_PREFILLED = "${SIGN_IN_PREFILLED}"' -i packages/clientvault-docker/docker-compose.yml
           
           echo "Setting up .env file..."
-          cp packages/twenty-docker/.env.example packages/twenty-docker/.env
+          cp packages/clientvault-docker/.env.example packages/clientvault-docker/.env
           
           echo "Generating secrets..."
-          echo "" >> packages/twenty-docker/.env
-          echo "# === Randomly generated secrets ===" >> packages/twenty-docker/.env
-          echo "APP_SECRET=$(openssl rand -base64 32)" >> packages/twenty-docker/.env
-          echo "PG_DATABASE_PASSWORD=$(openssl rand -hex 16)" >> packages/twenty-docker/.env
-          echo "SIGN_IN_PREFILLED=true" >> packages/twenty-docker/.env
+          echo "" >> packages/clientvault-docker/.env
+          echo "# === Randomly generated secrets ===" >> packages/clientvault-docker/.env
+          echo "APP_SECRET=$(openssl rand -base64 32)" >> packages/clientvault-docker/.env
+          echo "PG_DATABASE_PASSWORD=$(openssl rand -hex 16)" >> packages/clientvault-docker/.env
+          echo "SIGN_IN_PREFILLED=true" >> packages/clientvault-docker/.env
           echo "Docker compose build..."
-          cd packages/twenty-docker/
+          cd packages/clientvault-docker/
           docker compose build
         working-directory: ./
       
@@ -56,7 +56,7 @@ jobs:
       
       - name: Start services with correct SERVER_URL
         run: |
-          cd packages/twenty-docker/
+          cd packages/clientvault-docker/
           
           # Update the SERVER_URL with the tunnel URL
           echo "Setting SERVER_URL to ${{ steps.expose-tunnel.outputs.tunnel-url }}"
@@ -74,7 +74,7 @@ jobs:
           
           echo "Waiting for services to be ready..."
           count=0
-          while [ ! $(docker inspect --format='{{.State.Health.Status}}' twenty-db-1) = "healthy" ] || [ ! $(docker inspect --format='{{.State.Health.Status}}' twenty-server-1) = "healthy" ]; do
+          while [ ! $(docker inspect --format='{{.State.Health.Status}}' clientvault-db-1) = "healthy" ] || [ ! $(docker inspect --format='{{.State.Health.Status}}' clientvault-server-1) = "healthy" ]; do
               sleep 5
               count=$((count+1))
               if [ $count -gt 60 ]; then
@@ -90,7 +90,7 @@ jobs:
 
       - name: Seed Dev Workspace
         run: |
-          cd packages/twenty-docker/
+          cd packages/clientvault-docker/
           echo "Seeding full dev workspace..."
           if ! docker compose exec -T server yarn command:prod -- workspace:seed:dev; then
             echo "❌ Seeding full dev workspace failed. Dumping server logs..."
@@ -154,6 +154,6 @@ jobs:
       - name: Cleanup
         if: always()
         run: |
-          cd packages/twenty-docker/
+          cd packages/clientvault-docker/
           docker compose down -v
         working-directory: ./ 

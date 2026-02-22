@@ -17,7 +17,7 @@ jobs:
     uses: ./.github/workflows/changed-files.yaml
     with:
       files: |
-        packages/twenty-docker/**
+        packages/clientvault-docker/**
         docker-compose.yml
   test:
     needs: changed-files-check
@@ -33,7 +33,7 @@ jobs:
           # change image to localbuild using yq
           yq eval 'del(.services.server.image)' -i docker-compose.yml
           yq eval '.services.server.build.context = "../../"' -i docker-compose.yml
-          yq eval '.services.server.build.dockerfile = "./packages/twenty-docker/twenty/Dockerfile"' -i docker-compose.yml
+          yq eval '.services.server.build.dockerfile = "./packages/clientvault-docker/clientvault/Dockerfile"' -i docker-compose.yml
           yq eval '.services.server.restart = "no"' -i docker-compose.yml
 
           echo "Setting up .env file..."
@@ -55,10 +55,10 @@ jobs:
 
           echo "Waiting for database to start..."
           count=0
-          while [ ! $(docker inspect --format='{{.State.Health.Status}}' twenty-db-1) = "healthy" ]; do
+          while [ ! $(docker inspect --format='{{.State.Health.Status}}' clientvault-db-1) = "healthy" ]; do
               sleep 1;
               count=$((count+1));
-              if [ $(docker inspect --format='{{.State.Status}}' twenty-db-1) = "exited" ]; then
+              if [ $(docker inspect --format='{{.State.Status}}' clientvault-db-1) = "exited" ]; then
                   echo "Database exited"
                   docker compose logs db
                   exit 1
@@ -73,10 +73,10 @@ jobs:
 
           echo "Waiting for server to start..."
           count=0
-          while [ ! $(docker inspect --format='{{.State.Health.Status}}' twenty-server-1) = "healthy" ]; do
+          while [ ! $(docker inspect --format='{{.State.Health.Status}}' clientvault-server-1) = "healthy" ]; do
               sleep 1;
               count=$((count+1));
-              if [ $(docker inspect --format='{{.State.Status}}' twenty-server-1) = "exited" ]; then
+              if [ $(docker inspect --format='{{.State.Status}}' clientvault-server-1) = "exited" ]; then
                   echo "Server exited"
                   docker compose logs server
                   exit 1
@@ -88,7 +88,7 @@ jobs:
               fi
               echo "Still waiting for server... (${count}/300s)"
           done
-        working-directory: ./packages/twenty-docker/
+        working-directory: ./packages/clientvault-docker/
   ci-test-docker-compose-status-check:
     if: always() && !cancelled()
     timeout-minutes: 5

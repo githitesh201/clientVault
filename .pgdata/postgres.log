@@ -1,0 +1,64 @@
+2026-02-19 16:56:57.367 IST [37601] LOG:  starting PostgreSQL 17.6 (Ubuntu 17.6-0ubuntu0.25.04.1) on x86_64-pc-linux-gnu, compiled by gcc (Ubuntu 14.2.0-19ubuntu2) 14.2.0, 64-bit
+2026-02-19 16:56:57.367 IST [37601] LOG:  listening on IPv4 address "127.0.0.1", port 5433
+2026-02-19 16:56:57.370 IST [37601] FATAL:  could not create lock file "/var/run/postgresql/.s.PGSQL.5433.lock": Permission denied
+2026-02-19 16:56:57.372 IST [37601] LOG:  database system is shut down
+2026-02-19 16:57:11.988 IST [37677] LOG:  starting PostgreSQL 17.6 (Ubuntu 17.6-0ubuntu0.25.04.1) on x86_64-pc-linux-gnu, compiled by gcc (Ubuntu 14.2.0-19ubuntu2) 14.2.0, 64-bit
+2026-02-19 16:57:11.988 IST [37677] LOG:  listening on IPv4 address "127.0.0.1", port 5433
+2026-02-19 16:57:11.990 IST [37677] LOG:  listening on Unix socket "/home/hitesh/Desktop/twenty/.pgdata/.s.PGSQL.5433"
+2026-02-19 16:57:11.994 IST [37680] LOG:  database system was shut down at 2026-02-19 16:56:57 IST
+2026-02-19 16:57:12.001 IST [37677] LOG:  database system is ready to accept connections
+2026-02-19 16:57:12.125 IST [37686] ERROR:  DEFAULT is not allowed in this context at character 41
+2026-02-19 16:57:12.125 IST [37686] STATEMENT:  SELECT 1 FROM pg_database WHERE datname=default
+2026-02-19 16:57:12.326 IST [37691] ERROR:  column "test" does not exist at character 41
+2026-02-19 16:57:12.326 IST [37691] STATEMENT:  SELECT 1 FROM pg_database WHERE datname=test
+2026-02-19 17:02:12.093 IST [37678] LOG:  checkpoint starting: time
+2026-02-19 17:05:21.715 IST [37678] LOG:  checkpoint complete: wrote 1889 buffers (11.5%); 1 WAL file(s) added, 0 removed, 0 recycled; write=189.427 s, sync=0.130 s, total=189.623 s; sync files=606, longest=0.020 s, average=0.001 s; distance=8799 kB, estimate=8799 kB; lsn=0/1D88C38, redo lsn=0/1D88BA8
+2026-02-19 17:12:12.832 IST [37678] LOG:  checkpoint starting: time
+2026-02-19 17:16:42.298 IST [37678] LOG:  checkpoint complete: wrote 6627 buffers (40.4%); 0 WAL file(s) added, 0 removed, 5 recycled; write=269.200 s, sync=0.242 s, total=269.489 s; sync files=1063, longest=0.005 s, average=0.001 s; distance=81607 kB, estimate=81607 kB; lsn=0/6D3A970, redo lsn=0/6D3A8E0
+2026-02-21 15:21:29.692 IST [68906] FATAL:  could not open shared memory segment "/PostgreSQL.1170680732": Permission denied
+2026-02-21 15:21:29.695 IST [68906] LOG:  database system is shut down
+2026-02-21 15:22:18.283 IST [69023] LOG:  starting PostgreSQL 17.6 (Ubuntu 17.6-0ubuntu0.25.04.1) on x86_64-pc-linux-gnu, compiled by gcc (Ubuntu 14.2.0-19ubuntu2) 14.2.0, 64-bit
+2026-02-21 15:22:18.283 IST [69023] LOG:  listening on IPv4 address "127.0.0.1", port 5433
+2026-02-21 15:22:18.285 IST [69023] LOG:  listening on Unix socket "/home/hitesh/Desktop/twenty/.pgdata/.s.PGSQL.5433"
+2026-02-21 15:22:18.291 IST [69026] LOG:  database system was interrupted; last known up at 2026-02-19 17:16:42 IST
+2026-02-21 15:22:18.559 IST [69026] LOG:  database system was not properly shut down; automatic recovery in progress
+2026-02-21 15:22:18.565 IST [69026] LOG:  redo starts at 0/6D3A8E0
+2026-02-21 15:22:18.565 IST [69026] LOG:  invalid record length at 0/6D3AA20: expected at least 24, got 0
+2026-02-21 15:22:18.565 IST [69026] LOG:  redo done at 0/6D3A9E8 system usage: CPU: user: 0.00 s, system: 0.00 s, elapsed: 0.00 s
+2026-02-21 15:22:18.569 IST [69024] LOG:  checkpoint starting: end-of-recovery immediate wait
+2026-02-21 15:22:18.574 IST [69024] LOG:  checkpoint complete: wrote 3 buffers (0.0%); 0 WAL file(s) added, 0 removed, 0 recycled; write=0.002 s, sync=0.001 s, total=0.006 s; sync files=2, longest=0.001 s, average=0.001 s; distance=0 kB, estimate=0 kB; lsn=0/6D3AA20, redo lsn=0/6D3AA20
+2026-02-21 15:22:18.578 IST [69023] LOG:  database system is ready to accept connections
+2026-02-21 15:37:18.909 IST [69024] LOG:  checkpoint starting: time
+2026-02-21 15:37:20.786 IST [69024] LOG:  checkpoint complete: wrote 19 buffers (0.1%); 0 WAL file(s) added, 0 removed, 0 recycled; write=1.848 s, sync=0.018 s, total=1.886 s; sync files=17, longest=0.016 s, average=0.002 s; distance=11 kB, estimate=11 kB; lsn=0/6D3DA28, redo lsn=0/6D3D998
+2026-02-21 16:14:16.478 IST [315948] FATAL:  lock file "postmaster.pid" already exists
+2026-02-21 16:14:16.478 IST [315948] HINT:  Is another postmaster (PID 69023) running in data directory "/home/hitesh/Desktop/twenty/.pgdata"?
+2026-02-21 16:14:41.697 IST [316366] FATAL:  role "hitesh" does not exist
+2026-02-21 16:17:24.896 IST [336489] FATAL:  role "hitesh" does not exist
+2026-02-21 16:19:10.060 IST [356693] FATAL:  role "hitesh" does not exist
+2026-02-21 16:26:06.332 IST [378814] FATAL:  role "hitesh" does not exist
+2026-02-21 16:29:05.153 IST [419303] FATAL:  role "hitesh" does not exist
+2026-02-21 16:36:49.651 IST [440406] FATAL:  role "hitesh" does not exist
+2026-02-21 16:38:38.873 IST [461704] FATAL:  role "hitesh" does not exist
+2026-02-21 16:38:54.368 IST [464406] FATAL:  role "hitesh" does not exist
+2026-02-21 16:40:07.442 IST [488236] FATAL:  role "hitesh" does not exist
+2026-02-21 16:42:14.058 IST [508487] FATAL:  role "hitesh" does not exist
+2026-02-21 16:46:34.576 IST [528917] FATAL:  role "hitesh" does not exist
+2026-02-21 16:49:27.436 IST [549064] FATAL:  role "hitesh" does not exist
+2026-02-21 16:51:29.505 IST [580321] FATAL:  role "hitesh" does not exist
+2026-02-21 16:54:30.396 IST [600352] FATAL:  lock file "postmaster.pid" already exists
+2026-02-21 16:54:30.396 IST [600352] HINT:  Is another postmaster (PID 69023) running in data directory "/home/hitesh/Desktop/twenty/.pgdata"?
+2026-02-21 17:12:20.658 IST [69024] LOG:  checkpoint starting: time
+2026-02-21 17:12:21.094 IST [69024] LOG:  checkpoint complete: wrote 5 buffers (0.0%); 0 WAL file(s) added, 0 removed, 0 recycled; write=0.425 s, sync=0.002 s, total=0.439 s; sync files=5, longest=0.001 s, average=0.001 s; distance=12 kB, estimate=12 kB; lsn=0/6D40BC0, redo lsn=0/6D40B68
+2026-02-22 15:37:29.368 IST [4327] LOG:  starting PostgreSQL 17.6 (Ubuntu 17.6-0ubuntu0.25.04.1) on x86_64-pc-linux-gnu, compiled by gcc (Ubuntu 14.2.0-19ubuntu2) 14.2.0, 64-bit
+2026-02-22 15:37:29.368 IST [4327] LOG:  listening on IPv4 address "127.0.0.1", port 5433
+2026-02-22 15:37:29.370 IST [4327] LOG:  listening on Unix socket "/home/hitesh/Desktop/twenty/.pgdata/.s.PGSQL.5433"
+2026-02-22 15:37:29.380 IST [4330] LOG:  database system was interrupted; last known up at 2026-02-21 17:12:21 IST
+2026-02-22 15:37:29.674 IST [4330] LOG:  database system was not properly shut down; automatic recovery in progress
+2026-02-22 15:37:29.678 IST [4330] LOG:  redo starts at 0/6D40B68
+2026-02-22 15:37:29.678 IST [4330] LOG:  invalid record length at 0/6D41220: expected at least 24, got 0
+2026-02-22 15:37:29.678 IST [4330] LOG:  redo done at 0/6D411E8 system usage: CPU: user: 0.00 s, system: 0.00 s, elapsed: 0.00 s
+2026-02-22 15:37:29.683 IST [4328] LOG:  checkpoint starting: end-of-recovery immediate wait
+2026-02-22 15:37:29.690 IST [4328] LOG:  checkpoint complete: wrote 4 buffers (0.0%); 0 WAL file(s) added, 0 removed, 0 recycled; write=0.003 s, sync=0.002 s, total=0.008 s; sync files=3, longest=0.001 s, average=0.001 s; distance=1 kB, estimate=1 kB; lsn=0/6D41220, redo lsn=0/6D41220
+2026-02-22 15:37:29.694 IST [4327] LOG:  database system is ready to accept connections
+2026-02-22 15:42:29.794 IST [4328] LOG:  checkpoint starting: time
+2026-02-22 15:42:30.323 IST [4328] LOG:  checkpoint complete: wrote 6 buffers (0.0%); 0 WAL file(s) added, 0 removed, 0 recycled; write=0.520 s, sync=0.002 s, total=0.532 s; sync files=6, longest=0.001 s, average=0.001 s; distance=12 kB, estimate=12 kB; lsn=0/6D444D8, redo lsn=0/6D44480
