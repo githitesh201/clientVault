@@ -2280,7 +2280,7 @@ msgstr ""
 msgid "by {author}"
 msgstr ""
 
-#. js-lingui-id: 8Pfllj
+#. js-lingui-id: VkMd19
 #: src/modules/auth/sign-in-up/components/FooterNote.tsx
 msgid "By using ClientVault, you agree to the"
 msgstr "باستخدامك ClientVault، فإنك توافق على"
@@ -2573,7 +2573,7 @@ msgstr "تحقق من بريدك الإلكتروني"
 msgid "Check your inbox to verify your new email address."
 msgstr "تحقق من صندوق الوارد لديك لتأكيد عنوان بريدك الإلكتروني الجديد."
 
-#. js-lingui-id: SxwQE8
+#. js-lingui-id: 2apqVI
 #: src/modules/billing/hooks/useHandleCheckoutSession.ts
 msgid "Checkout session error. Please retry or contact ClientVault team"
 msgstr "خطأ في جلسة الدفع. يُرجى المحاولة مرة أخرى أو الاتصال بفريق ClientVault"
@@ -2716,6 +2716,11 @@ msgstr "سر العميل"
 #: src/modules/settings/security/components/SSO/SettingsSSOOIDCForm.tsx
 msgid "Client Settings"
 msgstr "إعدادات العميل"
+
+#. js-lingui-id: 9Riq3O
+#: src/modules/spreadsheet-import/steps/components/MatchColumnsStep/components/ColumnGrid.tsx
+msgid "ClientVault fields"
+msgstr "حقول ClientVault"
 
 #. js-lingui-id: mekEJ5
 #: src/hooks/useCopyToClipboard.tsx
@@ -5306,7 +5311,7 @@ msgstr "خطأ أثناء إلغاء تبديل الطبقة المقاسة."
 msgid "Error while cancelling plan switching."
 msgstr "خطأ أثناء إلغاء تبديل الخطة."
 
-#. js-lingui-id: QmR+2U
+#. js-lingui-id: Bg0eAr
 #: src/modules/billing/hooks/useEndSubscriptionTrialPeriod.ts
 msgid "Error while ending trial period. Please contact ClientVault team."
 msgstr "خطأ أثناء إنهاء فترة التجربة، يرجى التواصل مع فريق ClientVault."
@@ -9676,7 +9681,7 @@ msgstr "أداة تخطيط الصفحة"
 msgid "Page Name"
 msgstr ""
 
-#. js-lingui-id: NRvxzv
+#. js-lingui-id: gwvStA
 #: src/pages/not-found/NotFound.tsx
 msgid "Page Not Found | ClientVault"
 msgstr "الصفحة غير موجودة | ClientVault"
@@ -10294,7 +10299,7 @@ msgstr "اطّلع على سجلّ التغييرات"
 msgid "Read documentation"
 msgstr "اقرأ الوثائق"
 
-#. js-lingui-id: tCXcL7
+#. js-lingui-id: zaMxUQ
 #: src/pages/settings/ai/SettingsAIPrompts.tsx
 msgid "Read-only — managed by ClientVault"
 msgstr ""
@@ -12321,7 +12326,7 @@ msgstr "مزامنة مع جوجل"
 msgid "Sync with Outlook"
 msgstr "مزامنة مع Outlook"
 
-#. js-lingui-id: +9x4tK
+#. js-lingui-id: MPU26Q
 #: src/pages/onboarding/SyncEmails.tsx
 msgid "Sync your Emails and Calendar with ClientVault. Choose your privacy settings."
 msgstr "زامن بريدك الإلكتروني وتقويمك مع ClientVault. اختر إعدادات الخصوصية الخاصة بك."
@@ -13167,11 +13172,6 @@ msgstr ""
 #: src/modules/settings/data-model/fields/forms/select/components/SettingsDataModelFieldSelectFormOptionRow.tsx
 msgid "Turquoise"
 msgstr "فيروزي"
-
-#. js-lingui-id: JnaRPe
-#: src/modules/spreadsheet-import/steps/components/MatchColumnsStep/components/ColumnGrid.tsx
-msgid "ClientVault fields"
-msgstr "حقول ClientVault"
 
 #. js-lingui-id: YIjS4q
 #: src/pages/settings/ai/components/SettingsAgentModelCapabilities.tsx
@@ -14031,7 +14031,7 @@ msgstr "أسبوع"
 msgid "weeks"
 msgstr ""
 
-#. js-lingui-id: nTuObL
+#. js-lingui-id: c3Xgqx
 #: src/pages/auth/SignInUp.tsx
 msgid "Welcome to ClientVault"
 msgstr ""

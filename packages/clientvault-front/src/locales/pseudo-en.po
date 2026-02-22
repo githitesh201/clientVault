@@ -2275,7 +2275,7 @@ msgstr ""
 msgid "by {author}"
 msgstr ""
 
-#. js-lingui-id: 8Pfllj
+#. js-lingui-id: VkMd19
 #: src/modules/auth/sign-in-up/components/FooterNote.tsx
 msgid "By using ClientVault, you agree to the"
 msgstr ""
@@ -2568,7 +2568,7 @@ msgstr ""
 msgid "Check your inbox to verify your new email address."
 msgstr ""
 
-#. js-lingui-id: SxwQE8
+#. js-lingui-id: 2apqVI
 #: src/modules/billing/hooks/useHandleCheckoutSession.ts
 msgid "Checkout session error. Please retry or contact ClientVault team"
 msgstr ""
@@ -2710,6 +2710,11 @@ msgstr ""
 #. js-lingui-id: XUe4cu
 #: src/modules/settings/security/components/SSO/SettingsSSOOIDCForm.tsx
 msgid "Client Settings"
+msgstr ""
+
+#. js-lingui-id: 9Riq3O
+#: src/modules/spreadsheet-import/steps/components/MatchColumnsStep/components/ColumnGrid.tsx
+msgid "ClientVault fields"
 msgstr ""
 
 #. js-lingui-id: mekEJ5
@@ -5301,7 +5306,7 @@ msgstr ""
 msgid "Error while cancelling plan switching."
 msgstr ""
 
-#. js-lingui-id: QmR+2U
+#. js-lingui-id: Bg0eAr
 #: src/modules/billing/hooks/useEndSubscriptionTrialPeriod.ts
 msgid "Error while ending trial period. Please contact ClientVault team."
 msgstr ""
@@ -9671,7 +9676,7 @@ msgstr ""
 msgid "Page Name"
 msgstr ""
 
-#. js-lingui-id: NRvxzv
+#. js-lingui-id: gwvStA
 #: src/pages/not-found/NotFound.tsx
 msgid "Page Not Found | ClientVault"
 msgstr ""
@@ -10289,7 +10294,7 @@ msgstr ""
 msgid "Read documentation"
 msgstr ""
 
-#. js-lingui-id: tCXcL7
+#. js-lingui-id: zaMxUQ
 #: src/pages/settings/ai/SettingsAIPrompts.tsx
 msgid "Read-only — managed by ClientVault"
 msgstr ""
@@ -12316,7 +12321,7 @@ msgstr ""
 msgid "Sync with Outlook"
 msgstr ""
 
-#. js-lingui-id: +9x4tK
+#. js-lingui-id: MPU26Q
 #: src/pages/onboarding/SyncEmails.tsx
 msgid "Sync your Emails and Calendar with ClientVault. Choose your privacy settings."
 msgstr ""
@@ -13161,11 +13166,6 @@ msgstr ""
 #. js-lingui-id: EdHWDU
 #: src/modules/settings/data-model/fields/forms/select/components/SettingsDataModelFieldSelectFormOptionRow.tsx
 msgid "Turquoise"
-msgstr ""
-
-#. js-lingui-id: JnaRPe
-#: src/modules/spreadsheet-import/steps/components/MatchColumnsStep/components/ColumnGrid.tsx
-msgid "ClientVault fields"
 msgstr ""
 
 #. js-lingui-id: YIjS4q
@@ -14026,7 +14026,7 @@ msgstr ""
 msgid "weeks"
 msgstr ""
 
-#. js-lingui-id: nTuObL
+#. js-lingui-id: c3Xgqx
 #: src/pages/auth/SignInUp.tsx
 msgid "Welcome to ClientVault"
 msgstr ""

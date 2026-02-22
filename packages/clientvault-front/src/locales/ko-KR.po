@@ -2280,7 +2280,7 @@ msgstr ""
 msgid "by {author}"
 msgstr ""
 
-#. js-lingui-id: 8Pfllj
+#. js-lingui-id: VkMd19
 #: src/modules/auth/sign-in-up/components/FooterNote.tsx
 msgid "By using ClientVault, you agree to the"
 msgstr "ClientVault를 사용함으로써 귀하는 다음에 동의합니다"
@@ -2573,7 +2573,7 @@ msgstr "이메일을 확인하세요"
 msgid "Check your inbox to verify your new email address."
 msgstr "새 이메일 주소를 확인하려면 받은 편지함을 확인하세요."
 
-#. js-lingui-id: SxwQE8
+#. js-lingui-id: 2apqVI
 #: src/modules/billing/hooks/useHandleCheckoutSession.ts
 msgid "Checkout session error. Please retry or contact ClientVault team"
 msgstr "결제 세션 오류입니다. 다시 시도하거나 ClientVault 팀에 문의하십시오"
@@ -2716,6 +2716,11 @@ msgstr "클라이언트 비밀"
 #: src/modules/settings/security/components/SSO/SettingsSSOOIDCForm.tsx
 msgid "Client Settings"
 msgstr "클라이언트 설정"
+
+#. js-lingui-id: 9Riq3O
+#: src/modules/spreadsheet-import/steps/components/MatchColumnsStep/components/ColumnGrid.tsx
+msgid "ClientVault fields"
+msgstr "ClientVault 필드"
 
 #. js-lingui-id: mekEJ5
 #: src/hooks/useCopyToClipboard.tsx
@@ -5306,7 +5311,7 @@ msgstr "계측된 계층 전환 취소 중 오류 발생."
 msgid "Error while cancelling plan switching."
 msgstr "플랜 전환 취소 중 오류 발생."
 
-#. js-lingui-id: QmR+2U
+#. js-lingui-id: Bg0eAr
 #: src/modules/billing/hooks/useEndSubscriptionTrialPeriod.ts
 msgid "Error while ending trial period. Please contact ClientVault team."
 msgstr "시험 기간 종료 중 오류가 발생했습니다. ClientVault 팀에 문의하세요."
@@ -9676,7 +9681,7 @@ msgstr "페이지 레이아웃 위젯"
 msgid "Page Name"
 msgstr ""
 
-#. js-lingui-id: NRvxzv
+#. js-lingui-id: gwvStA
 #: src/pages/not-found/NotFound.tsx
 msgid "Page Not Found | ClientVault"
 msgstr "페이지를 찾을 수 없음 | ClientVault"
@@ -10294,7 +10299,7 @@ msgstr "변경 로그 보기"
 msgid "Read documentation"
 msgstr "문서 읽기"
 
-#. js-lingui-id: tCXcL7
+#. js-lingui-id: zaMxUQ
 #: src/pages/settings/ai/SettingsAIPrompts.tsx
 msgid "Read-only — managed by ClientVault"
 msgstr ""
@@ -12321,7 +12326,7 @@ msgstr "Google과 동기화"
 msgid "Sync with Outlook"
 msgstr "Outlook과 동기화"
 
-#. js-lingui-id: +9x4tK
+#. js-lingui-id: MPU26Q
 #: src/pages/onboarding/SyncEmails.tsx
 msgid "Sync your Emails and Calendar with ClientVault. Choose your privacy settings."
 msgstr "이메일과 캘린더를 ClientVault와 동기화하세요. 개인정보 설정을 선택하세요."
@@ -13167,11 +13172,6 @@ msgstr ""
 #: src/modules/settings/data-model/fields/forms/select/components/SettingsDataModelFieldSelectFormOptionRow.tsx
 msgid "Turquoise"
 msgstr "터콰이즈"
-
-#. js-lingui-id: JnaRPe
-#: src/modules/spreadsheet-import/steps/components/MatchColumnsStep/components/ColumnGrid.tsx
-msgid "ClientVault fields"
-msgstr "ClientVault 필드"
 
 #. js-lingui-id: YIjS4q
 #: src/pages/settings/ai/components/SettingsAgentModelCapabilities.tsx
@@ -14033,7 +14033,7 @@ msgstr "주"
 msgid "weeks"
 msgstr ""
 
-#. js-lingui-id: nTuObL
+#. js-lingui-id: c3Xgqx
 #: src/pages/auth/SignInUp.tsx
 msgid "Welcome to ClientVault"
 msgstr ""
