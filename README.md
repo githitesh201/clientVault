@@ -1,10 +1,4 @@
 
-# Installation
-
-See:
-🚀 [Self-hosting](https://docs.clientvault.com/developers/self-hosting/docker-compose)
-🖥️ [Local Setup](https://docs.clientvault.com/developers/local-setup)
-
 # Does the world need another CRM?
 
 We built ClientVault for three reasons:
@@ -102,11 +96,3 @@ Below are a few features we have implemented to date:
   Thanks to these amazing services that we use and recommend for UI testing (Chromatic), code review (Greptile), catching bugs (Sentry) and translating (Crowdin).
 
 
-# Join the Community
-
-- Star the repo
-- Subscribe to releases (watch -> custom -> releases)
-- Follow us on [Twitter](https://twitter.com/clientvaultcrm) or [LinkedIn](https://www.linkedin.com/company/clientvault/)
-- Join our [Discord](https://discord.gg/cx5n4Jzs57)
-- Improve translations on [Crowdin](https://clientvault.crowdin.com/clientvault)
-- [Contributions](https://github.com/clientvaulthq/clientvault/contribute) are, of course, most welcome!
