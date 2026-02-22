@@ -86,13 +86,6 @@ Below are a few features we have implemented to date:
 
 # Thanks
 
-<p align="center">
-  <a href="https://www.chromatic.com/"><img src="./packages/clientvault-website/public/images/readme/chromatic.png" height="30" alt="Chromatic" /></a>
-  <a href="https://greptile.com"><img src="./packages/clientvault-website/public/images/readme/greptile.png" height="30" alt="Greptile" /></a>
-  <a href="https://sentry.io/"><img src="./packages/clientvault-website/public/images/readme/sentry.png" height="30" alt="Sentry" /></a>
-  <a href="https://crowdin.com/"><img src="./packages/clientvault-website/public/images/readme/crowdin.png" height="30" alt="Crowdin" /></a>
-</p>
 
-  Thanks to these amazing services that we use and recommend for UI testing (Chromatic), code review (Greptile), catching bugs (Sentry) and translating (Crowdin).
 
 
