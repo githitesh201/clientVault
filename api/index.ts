@@ -4,5 +4,6 @@ import { env } from '../backend/src/config/env.js';
 
 export default async function handler(req: any, res: any): Promise<void> {
   await connectDatabase(env.MONGO_URI);
-  app(req, res);
+  const handle = app as unknown as (request: any, response: any) => void;
+  handle(req, res);
 }
