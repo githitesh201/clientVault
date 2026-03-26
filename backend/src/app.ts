@@ -44,7 +44,7 @@ app.use(rateLimit({ windowMs: 15 * 60 * 1000, max: 250 }));
 app.use(express.json({ limit: '1mb' }));
 app.use(morgan(env.NODE_ENV === 'production' ? 'combined' : 'dev'));
 
-app.get('/health', (_req: any, res: any) => {
+app.get(['/health', '/api/health'], (_req: any, res: any) => {
   res.json({ status: 'ok' });
 });
 
