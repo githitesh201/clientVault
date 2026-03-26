@@ -1,7 +1,7 @@
 {
   "version": 2,
-  "installCommand": "npm install --workspaces --include-workspace-root",
-  "buildCommand": "npm run build --workspace frontend",
+  "installCommand": "cd frontend && npm install",
+  "buildCommand": "cd frontend && npm run build",
   "outputDirectory": "frontend/dist",
   "routes": [
     { "src": "/api/(.*)", "dest": "/api/index.ts" },
